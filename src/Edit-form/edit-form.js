@@ -24,6 +24,7 @@ export default function EditForm(props) {
         <TextField
           name="updatedItem"
           label="Update item"
+          defaultValue={props.initialText}
           margin="normal"
         />
 
