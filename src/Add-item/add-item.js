@@ -21,12 +21,12 @@ const useStyles = makeStyles({
  },
 });
 
-export default function AddItem() {
+export default function AddItem(props) {
   const classes = useStyles();
 
   return (
     <Card className={classes.card}>
-      <form>
+      <form onSubmit={props.handleNewItem}>
         <TextField
           name="newItem"
           label="Add new item"
