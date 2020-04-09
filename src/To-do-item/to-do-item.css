@@ -1,0 +1,30 @@
+.to-do-item {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: 65px;
+}
+
+.to-do-item-text {
+    flex: 22;
+}
+
+.edit-button-container {
+    flex: 2;
+    color: grey;
+    cursor: pointer;
+}
+
+.edit-button-container:hover {
+    color: blue;
+}
+
+.delete-button-container {
+    flex: 2;
+    color: grey;
+    cursor: pointer;
+}
+
+.delete-button-container:hover {
+    color: red;
+}
