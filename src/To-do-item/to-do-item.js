@@ -27,14 +27,16 @@ class ToDoItem extends React.Component {
   }
 
   checkBoxChange = (e) => {
-    this.setState((prevState) => ({
-      completedItem: !prevState.completedItem,
-    }));
-    this.makePutRequest('completed', e.target.checked);
+    const url = 'https://jsonplaceholder.typicode.com/todos/' + this.state.id;
+    let newVal = e.target.checked;
+    axios.put(url, { completed: e.target.checked }).then( (response) => {
+      this.setState({
+        completedItem: newVal,
+      });
+    });
   };
 
   editItem = (e) => {
-    console.log('edit item');
     this.setState((prevState) => ({
       isEditing: !prevState.isEditing,
     }));
@@ -43,19 +45,14 @@ class ToDoItem extends React.Component {
   editDone = (e) => {
     e.preventDefault();
     const newData = e.target.updatedItem.value;
-    this.setState({
-      isEditing: false,
-      text: newData,
-    });
-    this.makePutRequest('title', newData)
-  };
-
-  makePutRequest(field ,data) {
     const url = 'https://jsonplaceholder.typicode.com/todos/' + this.state.id;
-    axios.put(url, { field: data }).then( (response) => {
-      console.log('success');
+    axios.put(url, { title: newData }).then( (response) => {
+      this.setState({
+        isEditing: false,
+        text: newData,
+      });
     });
-  }
+  };
 
   render() {
     const { classes } = this.props;
@@ -80,7 +77,7 @@ class ToDoItem extends React.Component {
             <EditIcon/>
           </div>
 
-          <div className="delete-button-container" onClick={this.props.handleDelete}>
+          <div className="delete-button-container" onClick={() => this.props.handleDelete(this.state.id)}>
             <DeleteIcon/>
           </div>
         </div>

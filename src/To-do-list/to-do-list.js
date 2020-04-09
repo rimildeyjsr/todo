@@ -34,7 +34,15 @@ class ToDoList extends React.Component {
   }
 
   deleteItem = (e) => {
-    console.log('delete');
+    const url = 'https://jsonplaceholder.typicode.com/todos/' + e;
+    axios.delete(url).then((response) => {
+      const arr = this.state.todoList.filter((item) => {
+        return item.id !== e;
+      });
+      this.setState({
+        todoList: arr,
+      });
+    });
   };
 
   render() {
